@@ -86,6 +86,19 @@ module.exports = {
       .use('raw-loader')
       .loader('raw-loader')
       .end()
+    
+    // 配置 sass-loader 使用 sass 而不是 node-sass
+    config.module
+      .rule('scss')
+      .oneOf('vue')
+      .use('sass-loader')
+      .tap(options => {
+        return {
+          ...options,
+          implementation: require('sass')
+        }
+      })
+    
     config.plugin('sitemap').use(sitemapPlugin, [
       {
         base: 'https://typer.owenyang.top',
