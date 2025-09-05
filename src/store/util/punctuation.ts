@@ -1,6 +1,6 @@
 export const punctuations = new Map<string, string>([
-  ['，', ','],
-  ['。', '.'],
+  ['，', 'o'],
+  ['。', "'"],
   ['《', '⇧,'],
   ['》', '⇧.'],
   ['｜', '⇧\\'],

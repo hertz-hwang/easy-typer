@@ -134,7 +134,7 @@
         </el-tab-pane>
         <el-tab-pane v-if="form.hint" label="标点设置" name="punctuation">
           <el-form-item label="标点用于">
-            <el-switch v-model="form.addPunctuationToCodings" active-text="码表及顶屏计算" inactive-text="顶屏计算"/>
+            <el-switch v-model="form.addPunctuationToCodings" active-text="默认" inactive-text="用户码表"/>
           </el-form-item>
           <el-form-item>
             <el-table ref="punctuationTable" :data="punctuations" border :height="punctuationTableHeight" size="mini">
@@ -372,8 +372,8 @@ export default class Setting extends Vue {
     reader.onload = () => {
       const trie = parseTrieNodeByCodinds(reader.result as string)
 
-      // 将中文标点加入词库
-      if (this.form.addToCodings) {
+      // 将用户自定义标点加入词库
+      if (this.form.addPunctuationToCodings) {
         for (const [key, value] of this.form.punctuations) {
           trie.put(key, value, -1)
         }
@@ -458,9 +458,11 @@ export default class Setting extends Vue {
 
     const saveCodings = (content: string) => {
       const trie = parseTrieNodeByCodinds(content)
-      // 将中文标点加入词库
-      for (const [key, value] of punctuations) {
-        trie.put(key, value, -1)
+      // 将用户自定义标点加入词库
+      if (this.form.addPunctuationToCodings) {
+        for (const [key, value] of this.form.punctuations) {
+          trie.put(key, value, -1)
+        }
       }
       // 将同一个字的多个编码排序
       trie.sort()

@@ -529,7 +529,7 @@ export class SettingState {
   /**
    * 选重键，用于提示
    */
-  selective = '␣23456789'
+  selective = '          '
   /**
    * 下一页按键
    */
@@ -626,7 +626,7 @@ export class SettingState {
    */
   punctuations = punctuations
   /**
-   * 将标点加入码表中
+   * 默认标点（否则仅用于顶屏计算）
    */
   addPunctuationToCodings = false
   /**
