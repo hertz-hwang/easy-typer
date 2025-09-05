@@ -128,14 +128,11 @@ export default class Article extends Vue {
       return
     }
 
-    const suffixOffset = this.hint ? 2 : 1
-    const baseOffset = (parseFloat(this.fontSize) + suffixOffset) * 12
-
-    const fixed = this.hint ? Math.max(0, baseOffset * (this.articleRows - 1) - 0.5 * baseOffset) : baseOffset * (this.articleRows - 1)
-
     const pending = document.querySelector('.code1,.code2,.code3,.code4,.pending') as HTMLElement
     if (pending) {
-      el.scrollTop = Math.max(0, pending.offsetTop - fixed)
+      // 使当前输入行居中显示
+      const centerOffset = clientHeight / 2
+      el.scrollTop = Math.max(0, pending.offsetTop - centerOffset)
     } else {
       el.scrollTop = Math.min(progress * scrollDistance, scrollDistance)
     }

@@ -87,14 +87,6 @@
               <span slot="title">关于</span>
             </el-menu-item>
           </el-submenu>
-          <el-menu-item index="/buy-me-a-coffee">
-            <i class="el-icon-wallet"></i>
-            <span slot="title">支持赞助</span>
-          </el-menu-item>
-          <el-menu-item index="/tiger">
-            <i class="el-icon-link"></i>
-            <span slot="title">虎码官网</span>
-          </el-menu-item>
         </el-menu>
         <!-- <div id="profile">
           <el-button v-if="!authenticated" type="text" @click="loginFormVisible = true">登录</el-button>
