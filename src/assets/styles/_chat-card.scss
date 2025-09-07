@@ -4,31 +4,28 @@
   font-variant-ligatures: none;
 
   --racing-font: "Noto Sans SC","Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
-  // --background-color: #FFF;
-  // --background-color: #0f0f13;
-  --background-color: #1c1f24;
-  --level1-border-color: #DCDFE6;
-  // --level2-border-color: #E4E7ED;
-  --level2-border-color: #3d444f;
-  // --level3-border-color: #EBEEF5;
-  --level3-border-color: #272b32;
-  // --level4-border-color: #F2F6FC;
-  --level4-border-color: #272b32;
-  // --main-color: #303133;
-  --main-color: rgba(229,224,216,.45);
-  --normal-color: #606266;
-  --secondary-color: #909399;
-  // --placeholder-color: #C0C4CC;
-  --placeholder-color: #909399;
+  
+  // iOS深色模式配色方案
+  --background-color: #000000; // iOS深色模式背景
+  --level1-border-color: #1C1C1E; // iOS深色模式卡片背景
+  --level2-border-color: #38383A; // iOS深色模式分割线
+  --level3-border-color: #2C2C2E; // iOS深色模式卡片边框
+  --level4-border-color: #1C1C1E;
+  
+  // 文字颜色 - iOS深色模式语义化颜色
+  --main-color: #FFFFFF; // iOS深色模式label颜色
+  --normal-color: #EBEBF5; // iOS深色模式secondaryLabel颜色
+  --secondary-color: #8E8E93; // iOS深色模式tertiaryLabel颜色
+  --placeholder-color: #8E8E93; // iOS深色模式placeholderText颜色
 
-  --pending: var(--secondary-color);
-  --code1: #F56C6C;
-  --code2: #409EFF;
-  --code3: #E6A23C;
+  // 功能颜色 - 基于iOS深色模式
+  --pending: var(--normal-color);
+  --code1: #FF453A; // iOS深色模式红色
+  --code2: #0A84FF; // iOS深色模式蓝色
+  --code3: #FF9F0A; // iOS深色模式橙色
   --code4: var(--secondary-color);
   --correct: var(--level2-border-color);
-  --error: #F56C6C;
-  // --typed: #FFFFFF;
+  --error: #FF453A; // iOS深色模式红色
   --typed: var(--secondary-color);
   --hint: var(--secondary-color);
   --font-size: 2.4rem;
@@ -158,12 +155,12 @@
 }
 
 .trendItem .up {
-  color: #f5222d;
+  color: #FF3B30; // iOS红色
 }
 
 .trendItem .down {
   // top: -1px;
-  color: #52c41a;
+  color: #34C759; // iOS绿色
 }
 
 .trendItem.trendItemGrey___1ksIM .down,
@@ -172,11 +169,11 @@
 }
 
 .trendItem.reverseColor___1BPCV .up {
-  color: #52c41a;
+  color: #34C759; // iOS绿色
 }
 
 .trendItem.reverseColor___1BPCV .down {
-  color: #f5222d;
+  color: #FF3B30; // iOS红色
 }
 
 .field {

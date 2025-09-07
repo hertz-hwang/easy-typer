@@ -28,12 +28,12 @@
 
 @mixin radius-border($color: var(--level3-border-color), $width: 1px) {
   border: $width solid $color;
-  border-radius: 4px;
+  border-radius: 8px; // iOS风格圆角
 }
 
 @mixin shadow-border($color: var(--level3-border-color), $width: 1px) {
   @include radius-border($color, $width);
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.08); // iOS风格阴影
 }
 
 @mixin mono-font {
@@ -46,33 +46,43 @@
   font-variant-ligatures: none;
 
   --racing-font: "LXGW WenKai", "霞鹜文楷 GB","霞鹜文楷 GB 屏幕阅读版","霞鹜文楷 GB 屏幕阅读版 常规","PingFang SC","思源黑体 CN","思源黑体", "Microsoft YaHei","Source Han Sans SC","Noto Sans CJK SC","WenQuanYi Micro Hei",sans-serif,SimSun, SimSun-ExtB, SimSun-ExtG;
-  --text-background-color: #FFF;
-  // --background-color: #f6f6f6; // 备用
-  --background-color: #f2f4f5;
-  // --level1-border-color: #DCDFE6;
-  --level1-border-color: #fefefe;
-  --level2-border-color: #DCDFE6;
-  --level3-border-color: #EBEEF5;
-  --level4-border-color: #F2F6FC;
-  --main-color: #303133;
-  --normal-color: #606266;
-  --secondary-color: #909399;
-  --placeholder-color: #C0C4CC;
+  
+  // iOS原生蓝配色方案
+  --text-background-color: #FFFFFF;
+  --background-color: #F2F2F7; // iOS系统背景色
+  --level1-border-color: #FFFFFF;
+  --level2-border-color: #C7C7CC; // iOS分割线颜色
+  --level3-border-color: #E5E5EA; // iOS卡片边框色
+  --level4-border-color: #F2F2F7; // iOS背景色
+  
+  // 文字颜色 - 基于iOS语义化颜色
+  --main-color: #000000; // iOS label颜色
+  --normal-color: #3C3C43; // iOS secondaryLabel颜色
+  --secondary-color: #8E8E93; // iOS tertiaryLabel颜色
+  --placeholder-color: #C7C7CC; // iOS placeholderText颜色
 
-  // --pending: var(--secondary-color);
+  // 功能颜色 - 基于iOS系统蓝
   --pending: var(--normal-color);
-  --code1: #F56C6C;
-  --code2: #E6A23C;
-  --code3: #409EFF;
+  --code1: #FF3B30; // iOS红色
+  --code2: #FF9500; // iOS橙色
+  --code3: #007AFF; // iOS系统蓝
   --code4: var(--secondary-color);
-  --correct: var(--placeholder-color);
-  --error: #F56C6C;
+  --correct: #C7C7CC; // iOS浅灰色
+  --error: #FF3B30; // iOS红色
   --typed: #FFFFFF;
   --hint: var(--secondary-color);
+  
+  // 字体设置
   --font-size: 3rem;
   --article-rows: 4;
   --input-rows: 2;
   --font-weight: 500;
+  
+  // iOS蓝主题色
+  --ios-blue: #007AFF;
+  --ios-blue-light: #5AC8FA;
+  --ios-blue-dark: #0051D5;
+  --ios-blue-bg: #E3F2FD;
 }
 ::-webkit-scrollbar {
   display: none;
@@ -102,9 +112,9 @@ html, body {
     top: 1rem;
   }
   .el-main {
-    padding: 10px;
+    padding: 16px; // iOS风格内边距
     background-color: var(--text-background-color);
-    border-radius: 4px;
+    border-radius: 12px; // iOS风格圆角
   }
   // .el-card__body, .el-main {
   //   padding: 10px;
@@ -116,7 +126,7 @@ html, body {
   }
 
   .el-progress-bar__outer {
-    background-color: #E6A23C;
+    background-color: var(--ios-blue-bg);
   }
 
   .el-menu.el-menu--horizontal {
@@ -131,6 +141,14 @@ html, body {
   margin: 0px auto;
   margin-bottom: 20px;
   // @include shadow-border(var(--level3-border-color));
+}
+
+// iOS风格卡片
+.ios-card {
+  background-color: var(--text-background-color);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--level3-border-color);
 }
 
 #home {
@@ -522,18 +540,18 @@ html, body {
   float: right;
 }
 
-// Colors
-$green          : #26c57d;
-$dark-green     : #009652;
-$cyan           : #00afff;
-$blue           : #007AFF;
-$purple         : #5856D6;
-$roseo          : #ff2d70;
-$red            : #FF3B30;
-$orange         : #ff804b;
-$yellow         : #FFCC00;
-$gray           : #8E8E93;
-$black          : #000000;
+// iOS原生蓝配色方案
+$green          : #34C759; // iOS绿色
+$dark-green     : #30B04A; // iOS深绿色
+$cyan           : #5AC8FA; // iOS青色
+$blue           : #007AFF; // iOS系统蓝
+$purple         : #5856D6; // iOS紫色
+$roseo          : #FF2D92; // iOS玫瑰色
+$red            : #FF3B30; // iOS红色
+$orange         : #FF9500; // iOS橙色
+$yellow         : #FFCC00; // iOS黄色
+$gray           : #8E8E93; // iOS灰色
+$black          : #000000; // 黑色
 
 
 $speed-levels: (
@@ -656,16 +674,19 @@ $speed-levels: (
   overflow-x: auto;
   overflow-y: hidden;
   background-color: var(--text-background-color);
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); // iOS风格菜单阴影
+  border-bottom: 1px solid var(--level3-border-color);
 }
 
 .page-content {
-  margin: 10px;
-  border-radius: 4px;
+  margin: 16px; // iOS风格边距
+  border-radius: 12px; // iOS风格圆角
   background-color: var(--text-background-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06); // iOS风格阴影
 
   &.no-bg {
     background-color: unset;
+    box-shadow: none;
   }
 }
 

@@ -15,7 +15,7 @@
           :router="false"
           :default-active="pathname"
           @select="handleSelect"
-          active-text-color="#eb9010"
+          active-text-color="#007AFF"
           mode="horizontal"
         >
           <el-menu-item index="/portal">
@@ -216,11 +216,11 @@ export default class Setting extends Vue {
   }
 
   customColors = [
-    { color: '#f56c6c', percentage: 20 },
-    { color: '#ff804b', percentage: 40 },
-    { color: '#5cb87a', percentage: 60 },
-    { color: '#1989fa', percentage: 80 },
-    { color: '#015a4f', percentage: 100 }
+    { color: '#FF3B30', percentage: 20 }, // iOS红色
+    { color: '#FF9500', percentage: 40 }, // iOS橙色
+    { color: '#34C759', percentage: 60 }, // iOS绿色
+    { color: '#007AFF', percentage: 80 }, // iOS系统蓝
+    { color: '#5856D6', percentage: 100 } // iOS紫色
   ]
 
   handleSelect (key: string, keyPath: string[]) {
