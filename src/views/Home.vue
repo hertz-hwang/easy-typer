@@ -754,10 +754,19 @@ export default class Home extends Vue {
         duration: 0
       })
 
-      // Generate share text with current article content
-      const hash = eapi.sha1Hmac(`${this.articleContent}-${this.articleIdentity}`)
-      const signature = `-----第${this.articleIdentity}段-共${this.articleContent.length}字-哈希${hash}--易跟打web发文`
-      const articleText = `${this.articleTitle || '未知标题'}\n${this.articleContent}\n${signature}`
+      // Prepare content: if title indicates special case, shift body by +1 unicode before sharing
+      const shouldShiftPlusOne = (this.articleTitle && this.articleTitle.includes('少妇白洁'))
+      const shift = (input: string, delta: number): string => Array.from(input).map(ch => {
+        const cp = ch.codePointAt(0)
+        if (cp === undefined) return ch
+        return String.fromCodePoint(cp + delta)
+      }).join('')
+      const contentForShare = shouldShiftPlusOne ? shift(this.articleContent, 1) : this.articleContent
+
+      // Generate share text with processed content
+      const hash = eapi.sha1Hmac(`${contentForShare}-${this.articleIdentity}`)
+      const signature = `-----第${this.articleIdentity}段-共${contentForShare.length}字-${hash}--离乱发瘟器ll25.0908`
+      const articleText = `${this.articleTitle || '未知标题'}\n${contentForShare}\n${signature}`
 
       // Copy to clipboard
       const textarea = document.createElement('textarea')

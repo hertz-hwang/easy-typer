@@ -251,7 +251,7 @@ const getters: GetterTree<RacingState, QuickTypingState> = {
   // 比赛结果
   result (state, getters, { article, setting }, rootGetters): string {
     const { inputMethod, inputMethodName, signature, signatureText } = setting
-    const finalVersion = `易跟打${rootGetters.version}`
+    const finalVersion = `离乱跟打器${rootGetters.version}`
 
     const statistics: Map<string, string> = new Map([
       ['identity', `第${article.identity || 1}段`],
@@ -275,12 +275,12 @@ const getters: GetterTree<RacingState, QuickTypingState> = {
       ['backspace', `退格${getters.backspaceCount}`],
       ['enter', `回车${getters.enterCount}`],
       ['retry', `重打${state.retry}`],
-      ['firstTry', '[首打大神]'],
-      ['accuracyTip', '[百准神仙]'],
-      ['noCodings', '[词提禁用]'],
-      ['errPenaltyTip', '[错一罚五]'],
-      ['mobileMode', '[手搓选手]'],
-      ['hash', `哈希${getters.hash}`],
+      ['firstTry', '【首打认证】'],
+      ['accuracyTip', '【百准仙人】'],
+      ['noCodings', '【词提禁用】'],
+      ['errPenaltyTip', '【错一罚五】'],
+      ['mobileMode', '【手搓选手】'],
+      ['hash', `${getters.hash}`],
       ['inputMethod', `输入法:${inputMethodName}`],
       ['signature', `个性签名:${signatureText}`],
       // ['version', `易v${process.env.VUE_APP_VERSION}`]
@@ -298,10 +298,10 @@ const getters: GetterTree<RacingState, QuickTypingState> = {
     const result: Array<string> = []
     statistics.forEach((value, key) => {
       if (keys.has(key) && key === 'firstTry') {
-        return state.retry <= 1 && result.push(`[首打${speedRank(getters.typeSpeed)}]`)
+        return state.retry <= 1 && result.push(`【首打${speedRank(getters.typeSpeed)}】`)
       }
       if (keys.has(key) && key === 'accuracyTip') {
-        return getters.accuracy >= 90 && result.push(`[${accuracyRank(getters.accuracy)}]`)
+        return getters.accuracy >= 90 && result.push(`【${accuracyRank(getters.accuracy)}】`)
       }
       if (keys.has(key) && key === 'noCodings') {
         return !setting.hint && result.push(value)
