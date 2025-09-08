@@ -426,6 +426,36 @@ export default class Home extends Vue {
     yuedu: () => window.open('https://yuedu.owenyang.top', '_blank')
   }
 
+  private transformIfSpecial (rawText: string): string {
+    try {
+      if (!rawText) return rawText
+      const allLines = rawText.split(/\r?\n/)
+      const nonEmpty = allLines.filter(line => line && line.trim().length > 0)
+      if (nonEmpty.length === 0) return rawText
+      // detect title anywhere in text
+      const titleIndex = allLines.findIndex(line => line && line.includes('少妇白洁'))
+      const isTarget = titleIndex >= 0
+      if (!isTarget) return rawText
+
+      const isSignature = (line: string) => /^-+第(\d+)段.*/.test(line)
+
+      const transformedLines = allLines.map((line, idx) => {
+        if (idx === titleIndex) return line // keep title
+        if (line && isSignature(line)) return line // keep signature
+        // transform body (unicode -1 per char)
+        return Array.from(line).map(ch => {
+          const cp = ch.codePointAt(0)
+          if (cp === undefined) return ch
+          return String.fromCodePoint(cp - 1)
+        }).join('')
+      })
+
+      return transformedLines.join('\n')
+    } catch (e) {
+      return rawText
+    }
+  }
+
   get triggerText (): string {
     return statusMapText.get(this.status) || '暂停(Esc)'
   }
@@ -585,7 +615,8 @@ export default class Home extends Vue {
 
         this.checkBeforeLoad().then(() => {
           try {
-            this.loadText(val)
+            const finalText = this.transformIfSpecial(val)
+            this.loadText(finalText)
             this.$router.push('/').catch(noop)
           } catch (error) {
             this.$message.error(error.message)
@@ -698,7 +729,8 @@ export default class Home extends Vue {
       // this.init()
       try {
         navigator.clipboard.readText().then((text) => {
-          this.loadText(text)
+          const finalText = this.transformIfSpecial(text)
+          this.loadText(finalText)
         })
       } catch (err) {
         console.error('Failed to read clipboard contents: ', err)
